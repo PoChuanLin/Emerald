@@ -36,3 +36,6 @@ bin/
 
 ### Emacs###
 *~
+
+### Lombok
+lombok.config
