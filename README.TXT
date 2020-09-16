@@ -10,6 +10,14 @@
  
   java -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
 
+
+Expecting a MySQL database at
+
+  jdbc:mysql://localhost:3306/emerald
+  
+with user/password as  developer/developer
+
+
 -- Sample Tests
 
 ### Enrollee
