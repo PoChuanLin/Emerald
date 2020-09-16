@@ -51,7 +51,7 @@ public class EnrolleeController {
 
     /* Remove an enrollee entirely */
 
-    @DeleteMapping("/enrollee/{id}")
+    @DeleteMapping("/enrollees/{id}")
     void deleteEnrollee(@PathVariable Long id) {
         repository.deleteById(id);
     }
