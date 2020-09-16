@@ -18,9 +18,11 @@ public class Enrollee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @lombok.NonNull
     @NotNull
     private String name;
 
+    @lombok.NonNull
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     @Past
@@ -28,6 +30,8 @@ public class Enrollee {
 
     private String phone;
 
+    /*
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<Dependent> dependents = new ArrayList<>();
+     */
 }

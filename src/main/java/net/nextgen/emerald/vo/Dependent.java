@@ -16,9 +16,16 @@ public class Dependent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @lombok.NonNull
+    @NotNull
+    @ManyToOne
+    private Enrollee enrollee;
+
+    @lombok.NonNull
     @NotNull
     private String name;
 
+    @lombok.NonNull
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     @Past
