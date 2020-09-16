@@ -39,6 +39,7 @@ public class EnrolleeController {
         return repository.findById(id)
                 .map(enrollee -> {
                     enrollee.setName(newEnrollee.getName());
+                    enrollee.setActivation(newEnrollee.getActivation());
                     enrollee.setDob(newEnrollee.getDob());
                     enrollee.setPhone(newEnrollee.getPhone());
                     return repository.save(enrollee);

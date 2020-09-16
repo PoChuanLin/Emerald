@@ -3,10 +3,9 @@ package net.nextgen.emerald.vo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -27,7 +26,5 @@ public class Dependent {
 
     @lombok.NonNull
     @NotNull
-//    @Temporal(javax.persistence.TemporalType.DATE)
-//    @Past
     private LocalDate dob;
 }
