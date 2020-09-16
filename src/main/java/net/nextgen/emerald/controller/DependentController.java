@@ -3,6 +3,9 @@ package net.nextgen.emerald.controller;
 import net.nextgen.emerald.dao.DependentRepository;
 import net.nextgen.emerald.vo.Dependent;
 import net.nextgen.emerald.vo.Enrollee;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -14,6 +17,8 @@ public class DependentController {
     @Inject
     private DependentRepository repository;
 
+    /* fetch */
+
     @GetMapping("/dependents")
     List<Dependent> all() {
         return repository.findAll();
@@ -23,6 +28,11 @@ public class DependentController {
     Dependent one(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DependentNotFoundException(id));
+    }
+
+    @GetMapping("/enrollees/{id}/dependents")
+    List<Dependent> findByEnrolleeId(@PathVariable long id) {
+        return repository.findByEnrolleeId(id);
     }
 
     /* Add dependents to an enrollee */
@@ -48,15 +58,22 @@ public class DependentController {
                 });
     }
 
-    /* Remove dependents from an enrollee */
+    /* Remove dependent */
 
     @DeleteMapping("/dependents/{id}")
     void deleteDependent(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
+    /* Remove dependents from an enrollee */
+
     @DeleteMapping("/dependents")
     void deleteDependents(@RequestBody Enrollee enrollee) {
         repository.deleteByEnrollee(enrollee);
+    }
+
+    @DeleteMapping("/enrollees/{id}/dependents")
+    void deleteDependents(@PathVariable Long id) {
+        repository.deleteByEnrolleeId(id);
     }
 }
