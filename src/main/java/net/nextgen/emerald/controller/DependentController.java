@@ -6,12 +6,24 @@ import net.nextgen.emerald.vo.Enrollee;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 public class DependentController {
 
     @Inject
     private DependentRepository repository;
+
+    @GetMapping("/dependents")
+    List<Dependent> all() {
+        return repository.findAll();
+    }
+
+    @GetMapping("/dependents/{id}")
+    Dependent one(@PathVariable Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new DependentNotFoundException(id));
+    }
 
     /* Add dependents to an enrollee */
 

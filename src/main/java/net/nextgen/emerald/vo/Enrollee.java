@@ -24,8 +24,8 @@ public class Enrollee {
 
     @lombok.NonNull
     @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @Past
+//    @Temporal(javax.persistence.TemporalType.DATE)
+//    @Past
     private LocalDate dob;
 
     private String phone;
