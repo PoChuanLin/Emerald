@@ -1,15 +1,12 @@
 package net.nextgen.emerald.controller;
 
+import javax.inject.Inject;
+import java.util.List;
+
 import net.nextgen.emerald.dao.DependentRepository;
 import net.nextgen.emerald.vo.Dependent;
 import net.nextgen.emerald.vo.Enrollee;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import javax.inject.Inject;
-import java.util.List;
 
 @RestController
 public class DependentController {
