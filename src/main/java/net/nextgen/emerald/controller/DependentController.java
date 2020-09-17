@@ -65,12 +65,12 @@ public class DependentController {
     /* Remove dependents from an enrollee */
 
     @DeleteMapping("/dependents")
-    void deleteDependents(@RequestBody Enrollee enrollee) {
+    void deleteByEnrollee(@RequestBody Enrollee enrollee) {
         repository.deleteByEnrollee(enrollee);
     }
 
     @DeleteMapping("/enrollees/{id}/dependents")
-    void deleteDependents(@PathVariable Long id) {
+    void deleteByEnrolleeId(@PathVariable Long id) {
         repository.deleteByEnrolleeId(id);
     }
 }
