@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EmeraldApplication {
 
     public static void main(String[] args) {
-	SpringApplication.run(EmeraldApplication.class, args);
+        SpringApplication.run(EmeraldApplication.class, args);
     }
 
 }
