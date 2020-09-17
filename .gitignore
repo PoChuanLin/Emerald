@@ -34,7 +34,7 @@ out/
 .vscode/
 bin/
 
-### Emacs###
+### Emacs ###
 *~
 
 ### Lombok

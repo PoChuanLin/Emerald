@@ -1,12 +1,11 @@
 package net.nextgen.emerald.controller;
 
+import java.util.List;
 import javax.inject.Inject;
 
 import net.nextgen.emerald.dao.EnrolleeRepository;
 import net.nextgen.emerald.vo.Enrollee;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class EnrolleeController {
