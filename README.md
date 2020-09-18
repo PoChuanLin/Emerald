@@ -42,6 +42,20 @@ and
 http://localhost:8080/swagger-ui/#/dependent-controller
 
 
+## Actuator
+
+Actuator is turned on in development configuration, 
+be sure to turn it off in production by delete the configuration.
+
+http://localhost:8080/actuator/
+
+http://localhost:8080/actuator/health
+
+http://localhost:8080/actuator/env
+
+http://localhost:8080/actuator/beans
+
+
 ## Sample Tests
 
 ### Enrollee
