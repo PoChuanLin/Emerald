@@ -3,9 +3,10 @@ package net.nextgen.emerald.controller;
 import java.util.List;
 import javax.inject.Inject;
 
+import org.springframework.web.bind.annotation.*;
+
 import net.nextgen.emerald.dao.EnrolleeRepository;
 import net.nextgen.emerald.vo.Enrollee;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EnrolleeController {
