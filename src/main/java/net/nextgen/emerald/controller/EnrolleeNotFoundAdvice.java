@@ -1,5 +1,6 @@
 package net.nextgen.emerald.controller;
 
+import net.nextgen.emerald.service.EnrolleeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

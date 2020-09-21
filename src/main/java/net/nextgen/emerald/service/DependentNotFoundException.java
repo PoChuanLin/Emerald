@@ -1,7 +1,7 @@
-package net.nextgen.emerald.controller;
+package net.nextgen.emerald.service;
 
 public class DependentNotFoundException extends RuntimeException {
-    DependentNotFoundException(Long id) {
+    public DependentNotFoundException(Long id) {
         super("Could not find dependent " + id);
     }
 }

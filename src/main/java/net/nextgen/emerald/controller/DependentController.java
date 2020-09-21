@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import net.nextgen.emerald.dao.DependentRepository;
+import net.nextgen.emerald.service.DependentNotFoundException;
 import net.nextgen.emerald.vo.Dependent;
 import net.nextgen.emerald.vo.Enrollee;
 import org.springframework.web.bind.annotation.*;

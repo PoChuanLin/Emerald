@@ -1,7 +1,7 @@
-package net.nextgen.emerald.controller;
+package net.nextgen.emerald.service;
 
 public class EnrolleeNotFoundException extends RuntimeException {
-    EnrolleeNotFoundException(Long id) {
+    public EnrolleeNotFoundException(Long id) {
         super("Could not find enrollee " + id);
     }
 }

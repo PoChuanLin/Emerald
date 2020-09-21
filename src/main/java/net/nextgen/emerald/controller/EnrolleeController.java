@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.dao.EnrolleeRepository;
+import net.nextgen.emerald.service.EnrolleeNotFoundException;
 import net.nextgen.emerald.vo.Enrollee;
 
 @RestController
