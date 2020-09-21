@@ -1,13 +1,13 @@
 package net.nextgen.emerald.service;
 
-import net.nextgen.emerald.dao.DependentRepository;
-import org.springframework.stereotype.Service;
-
-import net.nextgen.emerald.dao.EnrolleeRepository;
-import net.nextgen.emerald.vo.Enrollee;
-
 import javax.inject.Inject;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import net.nextgen.emerald.dao.DependentRepository;
+import net.nextgen.emerald.dao.EnrolleeRepository;
+import net.nextgen.emerald.vo.Enrollee;
 
 /**  Services for Enrollee persistence, CRUD processes.
  */

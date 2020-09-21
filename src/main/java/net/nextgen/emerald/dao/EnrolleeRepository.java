@@ -1,7 +1,7 @@
 package net.nextgen.emerald.dao;
 
-import net.nextgen.emerald.vo.Enrollee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import net.nextgen.emerald.vo.Enrollee;
 
 /** Repository for Enrollee objects
     For method details, refer to
