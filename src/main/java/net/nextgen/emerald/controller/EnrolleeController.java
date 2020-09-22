@@ -21,6 +21,8 @@ public class EnrolleeController {
         return enrolleeService.create(newEnrollee);
     }
 
+    /* fetch */
+
     @GetMapping("/enrollees")
     List<Enrollee> all() {
         return enrolleeService.read();

@@ -58,7 +58,9 @@ public class EnrolleeService {
      * @param id ID of the Enrollee, along with all its dependents, to be deleted.
      */
     public void delete(Long id) {
+        // delete associated dependents
         dependentRepository.deleteByEnrolleeId(id);
+        // delete the enrollee
         enrolleeRepository.deleteById(id);
     }
 }
