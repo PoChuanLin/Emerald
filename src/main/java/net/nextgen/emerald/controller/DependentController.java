@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.service.DependentService;
@@ -23,7 +24,7 @@ public class DependentController {
         return dependentService.create(newDependent);
     }
 
-    /** Create a Dependent via related Enrollee's ID
+    /** Create a Dependent with related Enrollee's ID
      *
      * @param name
      * @param dob
@@ -32,7 +33,7 @@ public class DependentController {
      */
     @PostMapping("/enrollees/{id}/dependents")
     Dependent newDependent(@RequestParam String name,
-                           @RequestParam Date dob,
+                           @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dob,
                            @PathVariable long id) {
         return dependentService.create(name, dob, id);
     }
