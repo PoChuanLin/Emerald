@@ -59,6 +59,10 @@ application {
 }
 */
 
+bootBuildImage {
+    imageName = "nextgen/emerald"
+}
+
 test {
     outputs.dir snippetsDir
     useJUnitPlatform()
