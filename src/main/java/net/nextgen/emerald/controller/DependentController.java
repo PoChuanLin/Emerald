@@ -1,6 +1,7 @@
 package net.nextgen.emerald.controller;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,20 @@ public class DependentController {
     @PostMapping("/dependents")
     Dependent newDependent(@RequestBody Dependent newDependent) {
         return dependentService.create(newDependent);
+    }
+
+    /** Create a Dependent via related Enrollee's ID
+     *
+     * @param name
+     * @param dob
+     * @param id The ID of parent Enrollee.
+     * @return
+     */
+    @PostMapping("/enrollees/{id}/dependents")
+    Dependent newDependent(@RequestParam String name,
+                           @RequestParam String dob,
+                           @PathVariable long id) {
+        return dependentService.create(name, dob, id);
     }
 
     /* fetch */

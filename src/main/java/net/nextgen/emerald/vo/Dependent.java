@@ -27,4 +27,10 @@ public class Dependent {
     @lombok.NonNull
     @NotNull
     private LocalDate dob;
+
+    public Dependent(String name, LocalDate dob, Enrollee enrollee) {
+        this.name = name;
+        this.dob  = dob;
+        this.enrollee = enrollee;
+    }
 }
