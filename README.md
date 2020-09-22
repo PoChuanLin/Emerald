@@ -12,7 +12,9 @@ To build Docker image
 ```
   ./gradlew bootBuildImage
 ```
-This build is optimized for Spring Boot application, with high efficent layered image.
+(edit ```bootBuildImage``` section in ```build.gradle``` to customerize image name.)
+
+This build is optimized for Spring Boot application, with high-efficent layered Docker image.
 (No ```Dockerfile``` is needed.)
 
 
