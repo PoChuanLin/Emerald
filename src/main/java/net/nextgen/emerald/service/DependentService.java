@@ -1,7 +1,7 @@
 package net.nextgen.emerald.service;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,12 +24,11 @@ public class DependentService {
         return dependentRepository.save(newDependent);
     }
 
-    public Dependent create(String name, String birthDate, long enrolleeID) {
+    public Dependent create(String name, Date dob, long enrolleeID) {
         Enrollee enrollee = enrolleeRepository.findById(enrolleeID)
                 .orElseThrow(() -> new EnrolleeNotFoundException(enrolleeID));
 
-        LocalDate dob = LocalDate.parse(birthDate);
-        Dependent dependent = new Dependent(name, dob, enrollee);
+        Dependent dependent = new Dependent(name, dob.toLocalDate(), enrollee);
         return create(dependent);
     }
 

@@ -1,6 +1,7 @@
 package net.nextgen.emerald.controller;
 
 import javax.inject.Inject;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class DependentController {
      */
     @PostMapping("/enrollees/{id}/dependents")
     Dependent newDependent(@RequestParam String name,
-                           @RequestParam String dob,
+                           @RequestParam Date dob,
                            @PathVariable long id) {
         return dependentService.create(name, dob, id);
     }
