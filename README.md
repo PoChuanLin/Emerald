@@ -2,9 +2,20 @@
 
 
 ## How to Build
+
+To build jar
 ```
   ./gradlew clean build
 ```
+
+To build Docker image
+```
+  ./gradlew bootBuildImage
+```
+This build is optimized for Spring Boot application, with high efficent layered image.
+(No ```Dockerfile``` is needed.)
+
+
 ## How to Run
 ```
   ./gradlew bootRun
@@ -42,6 +53,8 @@ and
 http://localhost:8080/swagger-ui/#/dependent-controller
 
 
+
+
 ## Actuator
 
 Actuator is turned on in development configuration, 
@@ -61,29 +74,29 @@ http://localhost:8080/actuator/beans
 ### Enrollee
 
 ```
+curl -v -X POST localhost:8080/enrollees -H 'Content-type:application/json' -d '{"name":"Foo27", "activation":true, "dob":"2000-03-27", "phone":"222-456-7890"}'
+
 curl -v -X PUT localhost:8080/enrollees/8 -H 'Content-type:application/json' -d '{"name":"Bar8", "activation":true, "dob":"2000-08-08", "phone":"888-456-7890"}'
 
 curl -v -X GET localhost:8080/enrollees/3
 
-curl -v -X POST localhost:8080/enrollees -H 'Content-type:application/json' -d '{"name":"Foo3", "activation":true, "dob":"2000-03-03", "phone":"222-456-7890"}'
+curl -v -X DELETE localhost:8080/enrollees/26
 
-curl -v -X POST localhost:8080/enrollees -H 'Content-type:application/json' -d '{"name":"Foo5", "activation":true, "dob":"2000-05-03", "phone":"555-456-7890"}'
-
-curl -v -X DELETE localhost:8080/enrollees/4
 ```
 
 ###  Dependent
 
 ```
-curl -v -X POST localhost:8080/dependents -H 'Content-type:application/json' -d '{"name":"D15", "dob":"2000-05-15", "enrollee":{"id":3 ,"name":"void", "activation":true, "dob":"2000-08-08"}}'
+curl -v -G -X POST localhost:8080/enrollees/29/dependents --data-urlencode 'dob=2007-12-06' --data-urlencode 'name=D29G'
+
+curl -v -X POST localhost:8080/dependents -H 'Content-type:application/json' -d '{"name":"D29C", "dob":"2000-05-23", "enrollee":{"id":29 ,"name":"void", "activation":true, "dob":"2000-08-23"}}'
 
 curl -v -X PUT localhost:8080/dependents/12 -H 'Content-type:application/json' -d '{"name":"D-12", "dob":"2000-12-01", "enrollee":{"id":3 ,"name":"void", "activation":true, "dob":"2000-08-08"}}'
 
 curl -v -X GET localhost:8080/enrollees/3/dependents
 
-curl -v -X DELETE localhost:8080/dependents/11
+curl -v -X DELETE localhost:8080/dependents/31
 
-curl -v -X DELETE localhost:8080/enrollees/3/dependents
+curl -v -X DELETE localhost:8080/enrollees/29/dependents
 
-curl -v -X DELETE localhost:8080/dependents -H 'Content-type:application/json' -d '{"id":3 ,"name":"void", "activation":true, "dob":"2000-08-08"}'
 ```
