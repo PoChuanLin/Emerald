@@ -1,9 +1,9 @@
 package net.nextgen.emerald.service;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import net.nextgen.emerald.dao.DependentRepository;
@@ -12,11 +12,11 @@ import net.nextgen.emerald.vo.Dependent;
 import net.nextgen.emerald.vo.Enrollee;
 
 @Service
+@RequiredArgsConstructor
 public class DependentService {
-    @Inject
-    private DependentRepository dependentRepository;
-    @Inject
-    private EnrolleeRepository enrolleeRepository;
+
+    private final DependentRepository dependentRepository;
+    private final EnrolleeRepository enrolleeRepository;
 
     /* Create */
 

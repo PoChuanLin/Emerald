@@ -1,18 +1,18 @@
 package net.nextgen.emerald.controller;
 
 import java.util.List;
-import javax.inject.Inject;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.service.EnrolleeService;
 import net.nextgen.emerald.vo.Enrollee;
 
 @RestController
+@RequiredArgsConstructor
 public class EnrolleeController {
 
-    @Inject
-    private EnrolleeService enrolleeService;
+    private final EnrolleeService enrolleeService;
 
     /* Add a new enrollee */
 

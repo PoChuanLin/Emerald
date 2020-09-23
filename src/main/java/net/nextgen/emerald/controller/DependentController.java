@@ -1,21 +1,20 @@
 package net.nextgen.emerald.controller;
 
-import javax.inject.Inject;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.service.DependentService;
 import net.nextgen.emerald.vo.Dependent;
-import net.nextgen.emerald.vo.Enrollee;
 
 @RestController
+@RequiredArgsConstructor
 public class DependentController {
-    @Inject
-    private DependentService dependentService;
+
+    private final DependentService dependentService;
 
     /* Add dependents to an enrollee */
 
