@@ -3,10 +3,14 @@
 
 ## How to Build
 
+### building Uber jar
+
 To build jar
 ```
   ./gradlew clean build
 ```
+
+### building Docker image
 
 To build Docker image
 ```
@@ -15,16 +19,14 @@ To build Docker image
 (edit ```bootBuildImage``` section in ```build.gradle``` to customerize image name.)
 
 This build is optimized for Spring Boot application, with high-efficent layered Docker image.
-(No ```Dockerfile``` is needed.)
+(No ```Dockerfile``` is needed, but need ```docker``` installed.)
+
 
 
 ## How to Run
+
 ```
-  ./gradlew bootRun
-```
- or
-```
-  java -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
+  java --enable-preview -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
 ```
 
 

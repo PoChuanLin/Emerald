@@ -2,6 +2,7 @@ package net.nextgen.emerald.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.service.DependentService;
 import net.nextgen.emerald.vo.Dependent;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -19,16 +21,16 @@ public class DependentController {
     /* Add dependents to an enrollee */
 
     @PostMapping("/dependents")
-    Dependent newDependent(@RequestBody Dependent newDependent) {
+    Dependent newDependent(@Valid @RequestBody Dependent newDependent) {
         return dependentService.create(newDependent);
     }
 
     /** Create a Dependent with related Enrollee's ID
      *
-     * @param name
-     * @param dob
+     * @param name Name of the Dependent to be created.
+     * @param dob  Date of birth for Dependent to be created.
      * @param id The ID of parent Enrollee.
-     * @return
+     * @return   Newly created Dependent.
      */
     @PostMapping("/enrollees/{id}/dependents")
     Dependent newDependent(@RequestParam String name,

@@ -2,14 +2,21 @@ plugins {
     id 'org.springframework.boot' version '2.3.4.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id "io.freefair.lombok" version "5.2.1"
-    id 'org.asciidoctor.convert' version '1.5.8'
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.1.4"
+    id 'org.asciidoctor.convert' version '1.5.8'
     id 'java'
 }
 
 group = 'net.nextgen'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '14'
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += '--enable-preview'
+}
+tasks.withType(Test) {
+    jvmArgs += "--enable-preview"
+}
 
 configurations {
     compileOnly {

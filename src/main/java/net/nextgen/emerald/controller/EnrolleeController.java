@@ -1,6 +1,7 @@
 package net.nextgen.emerald.controller;
 
 import java.util.List;
+import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class EnrolleeController {
     /* Add a new enrollee */
 
     @PostMapping("/enrollees")
-    Enrollee newEnrollee(@RequestBody Enrollee newEnrollee) {
+    Enrollee newEnrollee(@Valid @RequestBody Enrollee newEnrollee) {
         return enrolleeService.create(newEnrollee);
     }
 
