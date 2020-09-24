@@ -16,7 +16,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import net.nextgen.emerald.vo.Dependent;
 
-/** This test use DBUnit Integration for the Spring Testing Framework
+/** use DBUnit Integration for the Spring Testing Framework
  *
  */
 @DataJpaTest

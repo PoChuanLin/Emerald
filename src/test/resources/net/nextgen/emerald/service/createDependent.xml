@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+  <enrollee id="1" name="Foo1" activation="true" dob="2020-02-01" phone="123-456-7890"/>
+  <enrollee id="2" name="Foo2" activation="true" dob="2020-02-02" phone="123-456-7890"/>
+  <enrollee id="3" name="Foo3" activation="true" dob="2020-02-03" phone="123-456-7890"/>
+  <enrollee id="4" name="Foo4" activation="true" dob="2020-02-04" phone="123-456-7890"/>
+  <enrollee id="5" name="Foo5" activation="true" dob="2020-02-05" phone="123-456-7890"/>
+  <enrollee id="6" name="Foo6" activation="true" dob="2020-02-06" phone="123-456-7890"/>
+  <dependent id="61" name="Bar1" dob="2020-07-07" enrollee_id="1"/>
+  <dependent id="62" name="Bar2" dob="2020-07-08" enrollee_id="1"/>
+  <dependent id="63" name="Bar3" dob="2020-07-09" enrollee_id="2"/>
+  <dependent id="64" name="Bar4" dob="2020-07-10" enrollee_id="2"/>
+  <dependent id="65" name="Bar5" dob="2020-07-11" enrollee_id="2"/>
+  <dependent id="66" name="Bar6" dob="2020-07-12" enrollee_id="3"/>
+  <dependent id="67" name="Bar7" dob="2020-07-13" enrollee_id="3"/>
+  <dependent id="68" name="Bar8" dob="2020-07-14" enrollee_id="3"/>
+  <dependent id="69" name="Bar9" dob="2020-07-15" enrollee_id="5"/>
+</dataset>
