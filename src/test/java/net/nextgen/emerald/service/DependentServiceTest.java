@@ -52,5 +52,29 @@ public class DependentServiceTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    // read Dependent - good path
+    @Test
+    @DatabaseSetup("createDependent.xml")
+    void testRead() throws Exception {
+        Dependent dependent = dependentService.read(66L);
+        // fetched Dependent
+        assertNotNull(dependent);
+        assertEquals("Bar6", dependent.getName());
+        // fetched Dependent's Enrollee
+        assertNotNull(dependent.getEnrollee());
+        assertEquals("Foo3", dependent.getEnrollee().getName());
+    }
 
+    // read Dependent - wrong ID
+    @Test
+    @DatabaseSetup("createDependent.xml")
+    void testRead_wrongID() throws Exception {
+        Exception exception = assertThrows(DependentNotFoundException.class, () -> {
+           dependentService.read(99L);
+        });
+
+        String expectedMessage = "Could not find dependent 99";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
