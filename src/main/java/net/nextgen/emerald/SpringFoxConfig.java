@@ -7,6 +7,9 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/** Configuration for Swagger UI which build API document and test utility
+ *
+ */
 @Configuration
 public class SpringFoxConfig {
     @Bean

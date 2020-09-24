@@ -21,6 +21,15 @@ public class DependentService {
     /* Create */
 
     public Dependent create(Dependent newDependent) {
+        // validate Enrollee
+        Enrollee newEnrollee = newDependent.getEnrollee();
+        assert (newEnrollee != null) : "Missing Enrollee!";
+
+        long newEnrolleeID = newEnrollee.getId();
+        Enrollee enrollee = enrolleeRepository.findById(newEnrolleeID)
+                .orElseThrow(() -> new EnrolleeNotFoundException(newEnrolleeID));
+
+        // create Dependent
         return dependentRepository.save(newDependent);
     }
 
