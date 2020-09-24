@@ -16,8 +16,6 @@ public interface DependentRepository extends JpaRepository<Dependent, Long> {
     // fetch all Dependents associated with an Enrollee, given the Enrollee's ID.
     List<Dependent> findByEnrolleeId(long id);
 
-    // deleting all Dependents associated with an Enrollee.
-    List<Dependent> deleteByEnrollee(Enrollee enrollee);
     // deleting all Dependents associated with an Enrollee, given the Enrollee's ID.
     List<Dependent> deleteByEnrolleeId(long id);
 }
