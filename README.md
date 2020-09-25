@@ -32,7 +32,7 @@ This build is optimized for Spring Boot application, with high-efficent layered 
 ```
 or
 ```
-  java --enable-preview -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
+  java -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
 ```
 
 
