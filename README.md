@@ -3,6 +3,7 @@
 
 ## How to Build
 
+
 ### building Uber jar
 
 To build jar
@@ -11,6 +12,7 @@ To build jar
 ```
 
 ### building Docker image
+
 
 To build Docker image
 ```
@@ -25,6 +27,10 @@ This build is optimized for Spring Boot application, with high-efficent layered 
 
 ## How to Run
 
+```
+  ./gradlew bootRun
+```
+or
 ```
   java --enable-preview -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
 ```
