@@ -145,7 +145,7 @@ public class EnrolleeControllerTest {
     }
 
     /** ID for Enrollee to be deleted must be in URL Path,
-        no content ignored. */
+        content is ignored. */
     @Test
     void testDeleteEnrolleesId_MissingPathId() throws Exception {
         String enrollee = """
