@@ -2,9 +2,11 @@ package net.nextgen.emerald.service;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.List;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import net.nextgen.emerald.vo.Enrollee;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
@@ -55,7 +57,7 @@ public class DependentServiceTest {
     // read Dependent - good path
     @Test
     @DatabaseSetup("createDependent.xml")
-    void testRead() throws Exception {
+    void testRead_GoodPath() throws Exception {
         Dependent dependent = dependentService.read(66L);
         // fetched Dependent
         assertNotNull(dependent);
@@ -76,5 +78,42 @@ public class DependentServiceTest {
         String expectedMessage = "Could not find dependent 99";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    @DatabaseSetup("createDependent.xml")
+    void testUpdate() throws Exception {
+        Dependent change = new Dependent
+                ("BarNew", LocalDate.parse("2000-07-04"), new Enrollee("roller", true, LocalDate.parse("1999-12-25")));
+        dependentService.update(66L, change);
+
+        Dependent dependent = dependentService.read(66L);
+        assertEquals("BarNew", dependent.getName());
+        assertEquals(LocalDate.parse("2000-07-04"), dependent.getDob());
+    }
+
+    @Test
+    @DatabaseSetup("createDependent.xml")
+    void testDelete() throws Exception {
+        Dependent existing = dependentService.read(61L);
+        assertNotNull (existing);
+
+        dependentService.delete(61L);
+        Exception exception = assertThrows(DependentNotFoundException.class, () -> {
+            dependentService.read(61L);
+        });
+    }
+
+    @Test
+    @DatabaseSetup("createDependent.xml")
+    void testDeleteByEnrolleeId() throws Exception {
+        // given
+        List<Dependent> dependents = dependentService.findByEnrolleeId(2L);
+        assertEquals(3, dependents.size());
+
+        // when
+        dependentService.deleteByEnrolleeId(2L);
+        List<Dependent> left = dependentService.findByEnrolleeId(2L);
+        assertEquals(0, left.size());
     }
 }

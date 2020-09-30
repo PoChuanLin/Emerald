@@ -28,4 +28,10 @@ public class Enrollee {
     private LocalDate dob;
 
     private String phone;
+
+    public Enrollee (String name, Boolean activation, LocalDate dob) {
+        this.name = name;
+        this.activation = activation;
+        this.dob = dob;
+    }
 }
