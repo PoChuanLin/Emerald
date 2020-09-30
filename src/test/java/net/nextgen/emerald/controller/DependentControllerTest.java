@@ -1,11 +1,10 @@
 package net.nextgen.emerald.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,71 +12,134 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import net.nextgen.emerald.service.DependentService;
 
+/**  Tests for Web Controller tier - only.
+ *   Service tier is mocked.
+ */
 @WebMvcTest(controllers = DependentController.class)
 public class DependentControllerTest {
 
     @Inject
     private MockMvc mockMvc;
-    @Inject
-    private ObjectMapper objectMapper;
 
     @MockBean
     private DependentService dependentService;
 
-    // note the format for dob LocalDate
+    /* POST /dependents
+       content required, enrollee field only requires id */
+
     @Test
-    void testInputParsing() throws Exception {
-        mockMvc.perform(post("/enrollees/{id}/dependents", 33L)
+    void testPostDependents_GoodPath() throws Exception {
+        String dependent = """
+            {"name":"family first", "dob":"2000-05-23", "enrollee":{"id":29 ,"name":"good parent", "activation":true, "dob":"2000-08-23"}}
+            """;
+        mockMvc.perform(post("/dependents")
                 .contentType("application/json")
-                .param("name", "nobody")
+                .content(dependent))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testPostDependents_MissingEnrollee() throws Exception {
+        String dependent = """
+            {"name":"family first", "dob":"2000-05-23"}
+            """;
+        mockMvc.perform(post("/dependents")
+                .contentType("application/json")
+                .content(dependent))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testPostDependents_MissingDob() throws Exception {
+        String dependent = """
+            {"name":"family first", "enrollee":{"id":29}}
+            """;
+        mockMvc.perform(post("/dependents")
+                .contentType("application/json")
+                .content(dependent))
+                .andExpect(status().isBadRequest());
+    }
+
+    /* POST /enrollees/{enrollee_id}/dependents
+       dependent name & dob as request parameters
+     */
+
+    @Test
+    void testPostEnrolleesIdDependents_GoodPath() throws Exception {
+        mockMvc.perform(post("/enrollees/{enrollee_id}/dependents", 33L)
+                .param("name", "family first")
                 .param("dob", "2020-02-03"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void verifyInputSerialization() throws Exception {
+    void testPostEnrolleesIdDependents_MissingDob() throws Exception {
+        mockMvc.perform(post("/enrollees/{enrollee_id}/dependents", 33L)
+                .param("name", "family first"))
+                .andExpect(status().isBadRequest());
+    }
+
+    /* GET /dependents
+         no content
+     */
+
+    @Test
+    void testGetDependents_GoodPath() throws Exception {
+        mockMvc.perform(get("/dependents"))
+                .andExpect(status().isOk());
+    }
+
+    /* GET /dependents/{id}
+         no content
+     */
+
+    @Test
+    void testGetDependentsId_GoodPath() throws Exception {
+        mockMvc.perform(get("/dependents/{id}", 66L))
+                .andExpect(status().isOk());
+    }
+
+    /* GET /enrollees/{enrollee_id}/dependents
+         no content
+     */
+
+    @Test
+    void testGetEnrolleesIdDependents_GoodPath() throws Exception {
+        mockMvc.perform(get("/enrollees/{enrollee_id}/dependents", 33L))
+                .andExpect(status().isOk());
+    }
+
+    /* PUT /dependents/{id}
+         update dependent by id as path parameter.
+         both id & enrollee fields in content are ignored in update.
+     */
+
+    @Test
+    void testPutDependentsId_GoodPath() throws Exception {
         String dependent = """
-            {"name":"D29C", "dob":"2000-05-23", "enrollee":{"id":29 ,"name":"void", "activation":true, "dob":"2000-08-23"}}
+            {"name":"family first", "dob":"2000-05-23", "enrollee":{"id":3 ,"name":"void", "activation":true, "dob":"2000-08-23"}}
             """;
-        mockMvc.perform(post("/dependents")
+        mockMvc.perform(put("/dependents/{id}", 33L)
                 .contentType("application/json")
                 .content(dependent))
                 .andExpect(status().isOk());
     }
 
-    // note: dependent's parent enrollee - only need ID
+    /* DELETE /dependents/{id}
+     */
+
     @Test
-    void verifyInputValidation0() throws Exception {
-        String dependent = """
-            {"name":"D29C", "dob":"2000-05-23", "enrollee":{"id":29}}
-            """;
-        mockMvc.perform(post("/dependents")
-                .contentType("application/json")
-                .content(dependent))
+    void testDeleteDependentsId_GoodPath() throws Exception {
+        mockMvc.perform(delete("/dependents/{id}", 99L))
                 .andExpect(status().isOk());
     }
 
-    // case: dependent missing enrollee
-    @Test
-    void verifyInputValidation1() throws Exception {
-        String dependent = """
-            {"name":"D29C", "dob":"2000-05-23"}
-            """;
-        mockMvc.perform(post("/dependents")
-                .contentType("application/json")
-                .content(dependent))
-                .andExpect(status().isBadRequest());
-    }
+    /* DELETE /enrollees/{enrollee_id}/dependents
+     */
 
-    // case: dependent missing dob
     @Test
-    void verifyInputValidation2() throws Exception {
-        String dependent = """
-            {"name":"D29C", "enrollee":{"id":29}}
-            """;
-        mockMvc.perform(post("/dependents")
-                .contentType("application/json")
-                .content(dependent))
-                .andExpect(status().isBadRequest());
+    void testDeleteEnrolleeIdDependents_GoodPath() throws Exception {
+        mockMvc.perform(delete("/enrollees/{enrollee_id}/dependents", 33L))
+                .andExpect(status().isOk());
     }
 }

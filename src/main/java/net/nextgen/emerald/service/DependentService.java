@@ -71,6 +71,8 @@ public class DependentService {
                     return dependentRepository.save(dependent);
                 })
                 .orElseGet(() -> {
+                    // design question - probably should throw exception?
+                    fetchEnrollee(newDependent.getEnrollee().getId());
                     newDependent.setId(id);
                     return dependentRepository.save(newDependent);
                 });
