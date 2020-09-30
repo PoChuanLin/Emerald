@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import net.nextgen.emerald.service.EnrolleeService;
 
 /**  Tests for Web Controller tier - only.
- *   Services tier is mocked.
+ *   Service tier is mocked.
  */
 @WebMvcTest(controllers = EnrolleeController.class)
 public class EnrolleeControllerTest {

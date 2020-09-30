@@ -20,25 +20,30 @@ public class DependentService {
 
     /* Create */
 
-    public Dependent create(Dependent newDependent) {
+    public Dependent create (Dependent newDependent) {
         // validate Enrollee
         Enrollee newEnrollee = newDependent.getEnrollee();
         assert (newEnrollee != null) : "Missing Enrollee!";
+        // validate enrollee
+        fetchEnrollee (newEnrollee.getId());
 
-        long newEnrolleeID = newEnrollee.getId();
-        Enrollee enrollee = enrolleeRepository.findById(newEnrolleeID)
-                .orElseThrow(() -> new EnrolleeNotFoundException(newEnrolleeID));
-
-        // create Dependent
+        // create Dependent - save to repository
         return dependentRepository.save(newDependent);
     }
 
-    public Dependent create(String name, LocalDate dob, long enrolleeID) {
-        Enrollee enrollee = enrolleeRepository.findById(enrolleeID)
-                .orElseThrow(() -> new EnrolleeNotFoundException(enrolleeID));
-
+    public Dependent create (String name, LocalDate dob, long enrolleeID) {
+        Enrollee enrollee = fetchEnrollee (enrolleeID);
         Dependent dependent = new Dependent(name, dob, enrollee);
         return create(dependent);
+    }
+
+    /* fetch & validate
+         read Enrollee from repository, throws exception if not found.
+     */
+    private Enrollee fetchEnrollee (long enrolleeID) {
+        Enrollee enrollee = enrolleeRepository.findById(enrolleeID)
+                .orElseThrow(() -> new EnrolleeNotFoundException(enrolleeID));
+        return enrollee;
     }
 
     /* Retrieve */
@@ -52,7 +57,7 @@ public class DependentService {
                 .orElseThrow(() -> new DependentNotFoundException(id));
     }
 
-    public List<Dependent> findByEnrolleeId(Long id) {
+    public List<Dependent> findByEnrolleeId (Long id) {
         return dependentRepository.findByEnrolleeId(id);
     }
 
@@ -73,11 +78,11 @@ public class DependentService {
 
     /* Delete */
 
-    public void delete(Long id) {
+    public void delete (Long id) {
         dependentRepository.deleteById(id);
     }
 
-    public void deleteByEnrolleeId(Long id) {
+    public void deleteByEnrolleeId (Long id) {
         dependentRepository.deleteByEnrolleeId(id);
     }
 }
