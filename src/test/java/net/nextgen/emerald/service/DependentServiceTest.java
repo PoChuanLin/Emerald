@@ -83,10 +83,11 @@ public class DependentServiceTest {
     @Test
     @DatabaseSetup("createDependent.xml")
     void testUpdate() throws Exception {
+        // when
         Dependent change = new Dependent
                 ("BarNew", LocalDate.parse("2000-07-04"), new Enrollee("roller", true, LocalDate.parse("1999-12-25")));
         dependentService.update(66L, change);
-
+        // then
         Dependent dependent = dependentService.read(66L);
         assertEquals("BarNew", dependent.getName());
         assertEquals(LocalDate.parse("2000-07-04"), dependent.getDob());
@@ -95,10 +96,12 @@ public class DependentServiceTest {
     @Test
     @DatabaseSetup("createDependent.xml")
     void testDelete() throws Exception {
+        // given
         Dependent existing = dependentService.read(61L);
         assertNotNull (existing);
-
+        // when
         dependentService.delete(61L);
+        // then
         Exception exception = assertThrows(DependentNotFoundException.class, () -> {
             dependentService.read(61L);
         });
@@ -110,9 +113,9 @@ public class DependentServiceTest {
         // given
         List<Dependent> dependents = dependentService.findByEnrolleeId(2L);
         assertEquals(3, dependents.size());
-
         // when
         dependentService.deleteByEnrolleeId(2L);
+        // then
         List<Dependent> left = dependentService.findByEnrolleeId(2L);
         assertEquals(0, left.size());
     }
