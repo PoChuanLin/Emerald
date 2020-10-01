@@ -1,12 +1,13 @@
 package net.nextgen.emerald.service;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import net.nextgen.emerald.vo.Enrollee;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
@@ -15,8 +16,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import net.nextgen.emerald.vo.Dependent;
-
-import static org.junit.jupiter.api.Assertions.*;
+import net.nextgen.emerald.vo.Enrollee;
 
 @SpringBootTest
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -31,14 +31,24 @@ public class DependentServiceTest {
     // create Dependent - good path
     @Test
     @DatabaseSetup("createDependent.xml")
-    void testCreate() throws Exception {
+    void testCreate_GoodPath() throws Exception {
+        // Given
+        long countBefore = dependentService.count();
+
+        // When
         Dependent dependent = dependentService.create("dep20", LocalDate.now(), 3);
+        long id = dependent.getId();
+
+        // Then
+        long countAfter = dependentService.count();
+        assertEquals (countBefore + 1, countAfter);
         // newly created Dependent
+        dependent = dependentService.findById(id);
         assertNotNull(dependent);
         assertEquals("dep20", dependent.getName());
         // associated Enrollee
         assertNotNull(dependent.getEnrollee());
-        assertEquals("Foo3", dependent.getEnrollee().getName());
+        assertEquals(3, dependent.getEnrollee().getId());
     }
 
     // create Dependent - bad Enrollee ID
@@ -83,28 +93,40 @@ public class DependentServiceTest {
     @Test
     @DatabaseSetup("createDependent.xml")
     void testUpdate() throws Exception {
-        // when
+        // Given
+        Dependent dependent = dependentService.findById(66L);
+        assertEquals ("Bar6", dependent.getName());
+        assertEquals (LocalDate.parse("2020-07-12"), dependent.getDob());
+
+        // When
         Dependent change = new Dependent
                 ("BarNew", LocalDate.parse("2000-07-04"), new Enrollee("roller", true, LocalDate.parse("1999-12-25")));
         dependentService.update(66L, change);
-        // then
-        Dependent dependent = dependentService.read(66L);
-        assertEquals("BarNew", dependent.getName());
-        assertEquals(LocalDate.parse("2000-07-04"), dependent.getDob());
+
+        // Then
+        dependent = dependentService.read(66L);
+        assertEquals ("BarNew", dependent.getName());
+        assertEquals (LocalDate.parse("2000-07-04"), dependent.getDob());
     }
 
     @Test
     @DatabaseSetup("createDependent.xml")
-    void testDelete() throws Exception {
-        // given
+    void testDelete_GoodPath() throws Exception {
+        // Given
         Dependent existing = dependentService.read(61L);
         assertNotNull (existing);
-        // when
+        long countBefore = dependentService.count();
+
+        // When
         dependentService.delete(61L);
-        // then
+
+        // Then
         Exception exception = assertThrows(DependentNotFoundException.class, () -> {
             dependentService.read(61L);
         });
+
+        long countAfter = dependentService.count();
+        assertEquals (countBefore - 1, countAfter);
     }
 
     @Test

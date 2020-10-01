@@ -87,4 +87,12 @@ public class DependentService {
     public void deleteByEnrolleeId (Long id) {
         dependentRepository.deleteByEnrolleeId(id);
     }
+
+    public Dependent findById(Long id) {
+        return dependentRepository.findById(id).orElse(null);
+    }
+
+    public long count() {
+        return dependentRepository.count();
+    }
 }

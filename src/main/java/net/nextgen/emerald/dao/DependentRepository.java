@@ -3,7 +3,6 @@ package net.nextgen.emerald.dao;
 import java.util.List;
 
 import net.nextgen.emerald.vo.Dependent;
-import net.nextgen.emerald.vo.Enrollee;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.data.jpa.repository.JpaRepository;
