@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 @Entity
 @Data
@@ -16,7 +18,7 @@ public class Enrollee {
     private long id;
 
     @lombok.NonNull
-    @NotNull
+    @NotBlank
     private String name;
 
     @lombok.NonNull
@@ -25,6 +27,7 @@ public class Enrollee {
 
     @lombok.NonNull
     @NotNull
+    @Past
     private LocalDate dob;
 
     private String phone;

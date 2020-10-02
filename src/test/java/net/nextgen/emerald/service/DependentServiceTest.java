@@ -36,7 +36,7 @@ public class DependentServiceTest {
         long countBefore = dependentService.count();
 
         // When
-        Dependent dependent = dependentService.create("dep20", LocalDate.now(), 3);
+        Dependent dependent = dependentService.create("dep20", LocalDate.now().minusDays(2), 3);
         long id = dependent.getId();
 
         // Then
