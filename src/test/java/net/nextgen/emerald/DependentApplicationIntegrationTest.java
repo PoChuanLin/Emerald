@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.jupiter.api.Test;
@@ -34,23 +33,24 @@ public class DependentApplicationIntegrationTest {
     @Inject
     private MockMvc mockMvc;
     @Inject
-    private ObjectMapper objectMapper;
-    @Inject
     private DependentRepository dependentRepository;
 
     @Test
     @DatabaseSetup("createEnrollee.xml")
-    void testCreate() throws Exception {
-        long count0 = dependentRepository.findByEnrolleeId(3).size();
+    void testCreate_GoodPath() throws Exception {
+        // Given
+        long countBefore = dependentRepository.findByEnrolleeId(3).size();
 
+        // When
         mockMvc.perform(post("/enrollees/{id}/dependents", 3L)
                 .contentType("application/json")
                 .param("name", "nobody")
                 .param("dob", "2020-02-03"))
                 .andExpect(status().isOk());
 
-        long count1 = dependentRepository.findByEnrolleeId(3).size();
-        assertEquals(count0 + 1, count1);
+        // Then
+        long countAfter = dependentRepository.findByEnrolleeId(3).size();
+        assertEquals(countBefore + 1, countAfter);
     }
 
     @Test
