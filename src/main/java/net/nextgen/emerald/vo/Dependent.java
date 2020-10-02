@@ -23,12 +23,12 @@ public class Dependent {
     private Enrollee enrollee;
 
     @lombok.NonNull
-    @NotBlank
+    @NotBlank(message = "Name can not be blank.")
     private String name;
 
     @lombok.NonNull
     @NotNull
-    @Past
+    @Past(message = "Birthday must be in the past.")
     private LocalDate dob;
 
     public Dependent(String name, LocalDate dob, Enrollee enrollee) {

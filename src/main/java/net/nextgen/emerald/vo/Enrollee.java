@@ -18,7 +18,7 @@ public class Enrollee {
     private long id;
 
     @lombok.NonNull
-    @NotBlank
+    @NotBlank(message = "Name can not be blank.")
     private String name;
 
     @lombok.NonNull
@@ -27,7 +27,7 @@ public class Enrollee {
 
     @lombok.NonNull
     @NotNull
-    @Past
+    @Past(message = "Birthday must be in the past.")
     private LocalDate dob;
 
     private String phone;
