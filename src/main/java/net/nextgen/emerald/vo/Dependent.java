@@ -28,7 +28,7 @@ public class Dependent {
 
     @lombok.NonNull
     @NotNull
-    @Past(message = "Birthday must be in the past.")
+    @Past(message = "Birth date must be in the past.")
     private LocalDate dob;
 
     public Dependent(String name, LocalDate dob, Enrollee enrollee) {
