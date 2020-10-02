@@ -59,7 +59,7 @@ public class DependentController {
     /* Modify existing dependent */
 
     @PutMapping("/dependents/{id}")
-    Dependent replaceDependent(@PathVariable long id, @RequestBody Dependent newDependent) {
+    Dependent replaceDependent(@PathVariable long id, @Valid @RequestBody Dependent newDependent) {
         return dependentService.update(id, newDependent);
     }
 

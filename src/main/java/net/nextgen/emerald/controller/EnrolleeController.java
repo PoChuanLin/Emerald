@@ -37,7 +37,7 @@ public class EnrolleeController {
     /* Modify an existing enrollee */
 
     @PutMapping("/enrollees/{id}")
-    Enrollee replaceEnrollee(@PathVariable Long id, @RequestBody Enrollee newEnrollee) {
+    Enrollee replaceEnrollee(@PathVariable Long id, @Valid @RequestBody Enrollee newEnrollee) {
         return enrolleeService.update(id, newEnrollee);
     }
 
