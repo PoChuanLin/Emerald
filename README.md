@@ -49,20 +49,9 @@ Please edit an ```application.properties``` file to configure.
 
 ## REST WebService API
 
-Please see the Swagger UI page for details, after the service started.
+For API details please see Swagger UI page, after the service started.
 
-http://localhost:8080/swagger-ui/#/
-
-
-For service API, browser to these pages
-
-http://localhost:8080/swagger-ui/#/enrollee-controller
-
-and
-
-http://localhost:8080/swagger-ui/#/dependent-controller
-
-
+http://localhost:8080/swagger-ui.html
 
 
 ## Actuator

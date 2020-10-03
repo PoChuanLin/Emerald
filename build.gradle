@@ -2,7 +2,6 @@ plugins {
     id 'org.springframework.boot' version '2.3.4.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id "io.freefair.lombok" version "5.2.1"
-    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.1.4"
     id 'org.asciidoctor.convert' version '1.5.8'
     id 'java'
 }
@@ -33,7 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'javax.inject:javax.inject:1'
-    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.4.8'
 
     runtimeOnly 'mysql:mysql-connector-java'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
