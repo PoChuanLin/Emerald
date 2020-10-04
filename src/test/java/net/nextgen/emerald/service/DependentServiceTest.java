@@ -135,8 +135,10 @@ public class DependentServiceTest {
         // given
         List<Dependent> dependents = dependentService.findByEnrolleeId(2L);
         assertEquals(3, dependents.size());
+
         // when
         dependentService.deleteByEnrolleeId(2L);
+
         // then
         List<Dependent> left = dependentService.findByEnrolleeId(2L);
         assertEquals(0, left.size());
