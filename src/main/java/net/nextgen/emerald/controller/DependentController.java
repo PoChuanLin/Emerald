@@ -3,16 +3,18 @@ package net.nextgen.emerald.controller;
 import java.time.LocalDate;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.service.DependentService;
 import net.nextgen.emerald.vo.Dependent;
 
-
 @RestController
+@Validated
 @RequiredArgsConstructor
 public class DependentController {
 
@@ -33,7 +35,7 @@ public class DependentController {
      * @return   Newly created Dependent.
      */
     @PostMapping("/enrollees/{id}/dependents")
-    Dependent newDependent(@RequestParam String name,
+    Dependent newDependent(@RequestParam @NotBlank String name,
                            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dob,
                            @PathVariable long id) {
         return dependentService.create(name, dob, id);
