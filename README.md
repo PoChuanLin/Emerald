@@ -47,7 +47,7 @@ with user/password as  ```developer/developer```
 Please edit an ```application.properties``` file to configure.
 
 
-## REST WebService API
+## WebService REST API
 
 For API details please see Swagger UI page, after the service started.
 
