@@ -1,10 +1,15 @@
 package net.nextgen.emerald.service;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import net.nextgen.emerald.dao.DependentRepository;
 import net.nextgen.emerald.dao.EnrolleeRepository;
@@ -70,12 +75,7 @@ public class DependentService {
                     dependent.setDob(newDependent.getDob());
                     return dependentRepository.save(dependent);
                 })
-                .orElseGet(() -> {
-                    // design question - probably should throw exception?
-                    fetchEnrollee(newDependent.getEnrollee().getId());
-                    newDependent.setId(id);
-                    return dependentRepository.save(newDependent);
-                });
+                .orElseThrow(() -> new DependentNotFoundException(id));
     }
 
     /* Delete */
@@ -94,5 +94,11 @@ public class DependentService {
 
     public long count() {
         return dependentRepository.count();
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+        return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

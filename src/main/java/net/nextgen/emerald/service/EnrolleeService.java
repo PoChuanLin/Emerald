@@ -46,10 +46,7 @@ public class EnrolleeService {
                     enrollee.setPhone(newEnrollee.getPhone());
                     return enrolleeRepository.save(enrollee);
                 })
-                .orElseGet(() -> {
-                    newEnrollee.setId(id);
-                    return enrolleeRepository.save(newEnrollee);
-                });
+                .orElseThrow(() -> new EnrolleeNotFoundException(id));
     }
 
     /* Delete */

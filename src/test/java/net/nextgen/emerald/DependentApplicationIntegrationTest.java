@@ -56,10 +56,11 @@ public class DependentApplicationIntegrationTest {
     @Test
     @DatabaseSetup("createEnrollee.xml")
     void testCreate_wrongEnrolleeID() throws Exception {
+
         mockMvc.perform(post("/enrollees/{id}/dependents", 99L)
                 .contentType("application/json")
                 .param("name", "nobody")
                 .param("dob", "2020-02-03"))
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().isNotFound());
     }
 }

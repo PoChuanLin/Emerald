@@ -22,7 +22,7 @@ public class Enrollee {
     private String name;
 
     @lombok.NonNull
-    @NotNull
+    @NotNull (message = "Activation must not be null.")
     private Boolean activation;
 
     @lombok.NonNull
