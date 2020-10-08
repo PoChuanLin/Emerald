@@ -37,4 +37,22 @@ public class ErrorHandlingControllerAdvice {
         }
         return error;
     }
+
+    @ExceptionHandler (EnrolleeNotFoundException.class)
+    @ResponseStatus (HttpStatus.NOT_FOUND)
+    @ResponseBody
+    ValidationErrorResponse onEnrolleeNotFoundException (EnrolleeNotFoundException ex) {
+        ValidationErrorResponse error = new ValidationErrorResponse();
+        error.getViolations().add (new Violation(ex.getClass().getSimpleName(), ex.getMessage()));
+        return error;
+    }
+
+    @ExceptionHandler (DependentNotFoundException.class)
+    @ResponseStatus (HttpStatus.NOT_FOUND)
+    @ResponseBody
+    ValidationErrorResponse onDependentNotFoundException (DependentNotFoundException ex) {
+        ValidationErrorResponse error = new ValidationErrorResponse();
+        error.getViolations().add (new Violation(ex.getClass().getSimpleName(), ex.getMessage()));
+        return error;
+    }
 }
