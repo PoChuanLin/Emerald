@@ -62,8 +62,8 @@ public class DependentService {
                 .orElseThrow(() -> new DependentNotFoundException(id));
     }
 
-    public List<Dependent> findByEnrolleeId (Long id) {
-        return dependentRepository.findByEnrolleeId(id);
+    public List<Dependent> findByEnrolleeId (Long enrolleeId) {
+        return dependentRepository.findByEnrolleeId(enrolleeId);
     }
 
     /* Update */
@@ -84,8 +84,8 @@ public class DependentService {
         dependentRepository.deleteById(id);
     }
 
-    public void deleteByEnrolleeId (Long id) {
-        dependentRepository.deleteByEnrolleeId(id);
+    public void deleteByEnrolleeId (Long enrolleeId) {
+        dependentRepository.deleteByEnrolleeId(enrolleeId);
     }
 
     public Dependent findById(Long id) {
@@ -94,11 +94,5 @@ public class DependentService {
 
     public long count() {
         return dependentRepository.count();
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
-        return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
