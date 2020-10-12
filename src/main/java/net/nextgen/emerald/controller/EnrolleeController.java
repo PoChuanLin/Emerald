@@ -29,23 +29,23 @@ public class EnrolleeController {
         return enrolleeService.read();
     }
 
-    @GetMapping("/enrollees/{id}")
-    Enrollee one(@PathVariable Long id) {
-        return enrolleeService.read(id);
+    @GetMapping("/enrollees/{enrolleeId}")
+    Enrollee one(@PathVariable Long enrolleeId) {
+        return enrolleeService.read(enrolleeId);
     }
 
     /* Modify an existing enrollee */
 
-    @PutMapping("/enrollees/{id}")
-    Enrollee replaceEnrollee(@PathVariable Long id, @Valid @RequestBody Enrollee newEnrollee) {
-        return enrolleeService.update(id, newEnrollee);
+    @PutMapping("/enrollees/{enrolleeId}")
+    Enrollee replaceEnrollee(@PathVariable Long enrolleeId, @Valid @RequestBody Enrollee newEnrollee) {
+        return enrolleeService.update(enrolleeId, newEnrollee);
     }
 
     /* Remove an enrollee entirely */
 
     /* The enrollee and all associated dependents will be deleted */
-    @DeleteMapping("/enrollees/{id}")
-    void deleteEnrollee(@PathVariable Long id) {
-        enrolleeService.delete(id);
+    @DeleteMapping("/enrollees/{enrolleeId}")
+    void deleteEnrollee(@PathVariable Long enrolleeId) {
+        enrolleeService.delete(enrolleeId);
     }
 }

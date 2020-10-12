@@ -32,14 +32,14 @@ public class DependentController {
      *
      * @param name Name of the Dependent to be created.
      * @param dob  Date of birth for Dependent to be created.
-     * @param id The ID of parent Enrollee.
+     * @param enrolleeId The ID of parent Enrollee.
      * @return   Newly created Dependent.
      */
-    @PostMapping("/enrollees/{id}/dependents")
+    @PostMapping("/enrollees/{enrolleeId}/dependents")
     Dependent newDependent(@RequestParam @NotBlank String name,
                            @RequestParam @PastOrPresent @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dob,
-                           @PathVariable long id) {
-        return dependentService.create(name, dob, id);
+                           @PathVariable long enrolleeId) {
+        return dependentService.create(name, dob, enrolleeId);
     }
 
     /* fetch */
@@ -49,33 +49,33 @@ public class DependentController {
         return dependentService.read();
     }
 
-    @GetMapping("/dependents/{id}")
-    Dependent one(@PathVariable Long id) {
-        return dependentService.read(id);
+    @GetMapping("/dependents/{dependentId}")
+    Dependent one(@PathVariable Long dependentId) {
+        return dependentService.read(dependentId);
     }
 
-    @GetMapping("/enrollees/{id}/dependents")
-    List<Dependent> findByEnrolleeId(@PathVariable long id) {
-        return dependentService.findByEnrolleeId(id);
+    @GetMapping("/enrollees/{enrolleeId}/dependents")
+    List<Dependent> findByEnrolleeId(@PathVariable long enrolleeId) {
+        return dependentService.findByEnrolleeId(enrolleeId);
     }
 
     /* Modify existing dependent */
 
-    @PutMapping("/dependents/{id}")
-    Dependent replaceDependent(@PathVariable long id, @Valid @RequestBody Dependent newDependent) {
-        return dependentService.update(id, newDependent);
+    @PutMapping("/dependents/{dependentId}")
+    Dependent replaceDependent(@PathVariable long dependentId, @Valid @RequestBody Dependent newDependent) {
+        return dependentService.update(dependentId, newDependent);
     }
 
     /* Remove dependent */
     /* Remove dependents from an enrollee */
 
-    @DeleteMapping("/dependents/{id}")
-    void delete(@PathVariable long id) {
-        dependentService.delete(id);
+    @DeleteMapping("/dependents/{dependentId}")
+    void delete(@PathVariable long dependentId) {
+        dependentService.delete(dependentId);
     }
 
-    @DeleteMapping("/enrollees/{id}/dependents")
-    void deleteByEnrolleeId(@PathVariable long id) {
-        dependentService.deleteByEnrolleeId(id);
+    @DeleteMapping("/enrollees/{enrolleeId}/dependents")
+    void deleteByEnrolleeId(@PathVariable long enrolleeId) {
+        dependentService.deleteByEnrolleeId(enrolleeId);
     }
 }
