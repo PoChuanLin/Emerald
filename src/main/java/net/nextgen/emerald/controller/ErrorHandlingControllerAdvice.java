@@ -3,8 +3,6 @@ package net.nextgen.emerald.controller;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-import net.nextgen.emerald.service.DependentNotFoundException;
-import net.nextgen.emerald.service.EnrolleeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,6 +10,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import net.nextgen.emerald.service.DependentNotFoundException;
+import net.nextgen.emerald.service.EnrolleeNotFoundException;
 
 @ControllerAdvice
 public class ErrorHandlingControllerAdvice {
