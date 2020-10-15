@@ -8,6 +8,7 @@ import javax.validation.constraints.PastOrPresent;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class DependentController {
     /* Add dependents to an enrollee */
 
     @PostMapping("/dependents")
+    @ResponseStatus(HttpStatus.CREATED)
     Dependent newDependent(@Valid @RequestBody Dependent newDependent) {
         return dependentService.create(newDependent);
     }
@@ -36,6 +38,7 @@ public class DependentController {
      * @return   Newly created Dependent.
      */
     @PostMapping("/enrollees/{enrolleeId}/dependents")
+    @ResponseStatus(HttpStatus.CREATED)
     Dependent newDependent(@RequestParam @NotBlank String name,
                            @RequestParam @PastOrPresent @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dob,
                            @PathVariable long enrolleeId) {
@@ -70,11 +73,13 @@ public class DependentController {
     /* Remove dependents from an enrollee */
 
     @DeleteMapping("/dependents/{dependentId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     void delete(@PathVariable long dependentId) {
         dependentService.delete(dependentId);
     }
 
     @DeleteMapping("/enrollees/{enrolleeId}/dependents")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     void deleteByEnrolleeId(@PathVariable long enrolleeId) {
         dependentService.deleteByEnrolleeId(enrolleeId);
     }

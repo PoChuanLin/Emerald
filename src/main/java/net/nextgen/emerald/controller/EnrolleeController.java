@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import net.nextgen.emerald.service.EnrolleeService;
@@ -18,6 +19,7 @@ public class EnrolleeController {
     /* Add a new enrollee */
 
     @PostMapping("/enrollees")
+    @ResponseStatus(HttpStatus.CREATED)
     Enrollee newEnrollee(@Valid @RequestBody Enrollee newEnrollee) {
         return enrolleeService.create(newEnrollee);
     }
@@ -45,6 +47,7 @@ public class EnrolleeController {
 
     /* The enrollee and all associated dependents will be deleted */
     @DeleteMapping("/enrollees/{enrolleeId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     void deleteEnrollee(@PathVariable Long enrolleeId) {
         enrolleeService.delete(enrolleeId);
     }

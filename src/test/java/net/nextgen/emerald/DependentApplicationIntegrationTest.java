@@ -37,7 +37,7 @@ public class DependentApplicationIntegrationTest {
 
     @Test
     @DatabaseSetup("createEnrollee.xml")
-    void testCreate_GoodPath() throws Exception {
+    void testCreate_HappyPath() throws Exception {
         // Given
         long countBefore = dependentRepository.findByEnrolleeId(3).size();
 
@@ -46,7 +46,7 @@ public class DependentApplicationIntegrationTest {
                 .contentType("application/json")
                 .param("name", "nobody")
                 .param("dob", "2020-02-03"))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         // Then
         long countAfter = dependentRepository.findByEnrolleeId(3).size();

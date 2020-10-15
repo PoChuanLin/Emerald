@@ -28,14 +28,14 @@ public class DependentControllerTest {
        content required, enrollee field only requires id */
 
     @Test
-    void testPostDependents_GoodPath() throws Exception {
+    void testPostDependents_HappyPath() throws Exception {
         String dependent = """
             {"name":"family first", "dob":"2000-05-23", "enrollee":{"id":29 ,"name":"good parent", "activation":true, "dob":"2000-08-23"}}
             """;
         mockMvc.perform(post("/dependents")
                 .contentType("application/json")
                 .content(dependent))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -65,11 +65,11 @@ public class DependentControllerTest {
      */
 
     @Test
-    void testPostEnrolleesIdDependents_GoodPath() throws Exception {
+    void testPostEnrolleesIdDependents_HappyPath() throws Exception {
         mockMvc.perform(post("/enrollees/{enrollee_id}/dependents", 33L)
                 .param("name", "family first")
                 .param("dob", "2020-02-03"))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -129,17 +129,17 @@ public class DependentControllerTest {
      */
 
     @Test
-    void testDeleteDependentsId_GoodPath() throws Exception {
+    void testDeleteDependentsId_HappyPath() throws Exception {
         mockMvc.perform(delete("/dependents/{id}", 99L))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 
     /* DELETE /enrollees/{enrollee_id}/dependents
      */
 
     @Test
-    void testDeleteEnrolleeIdDependents_GoodPath() throws Exception {
+    void testDeleteEnrolleeIdDependents_HappyPath() throws Exception {
         mockMvc.perform(delete("/enrollees/{enrollee_id}/dependents", 33L))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 }

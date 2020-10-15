@@ -31,7 +31,7 @@ public class EnrolleeControllerTest {
         content required, phone is optional  */
 
     @Test
-    void testPostEnrollees_InputValidation_GoodPath() throws Exception {
+    void testPostEnrollees_InputValidation_HappyPath() throws Exception {
         String enrollee = """
                 {"name":"Foo27", "activation":true, "dob":"2000-03-27"}
                 """;
@@ -39,7 +39,7 @@ public class EnrolleeControllerTest {
         mockMvc.perform(post("/enrollees")
                 .contentType("application/json")
                 .content(enrollee))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -139,9 +139,9 @@ public class EnrolleeControllerTest {
         delete Enrollee by id as path parameter, no content required.  */
 
     @Test
-    void testDeleteEnrolleesId_GoodPath() throws Exception {
+    void testDeleteEnrolleesId_HappyPath() throws Exception {
         mockMvc.perform(delete("/enrollees/999"))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 
     /** ID for Enrollee to be deleted must be in URL Path,
