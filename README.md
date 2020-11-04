@@ -1,5 +1,19 @@
 # Backend-Challenge for NextGen_Emerald
 
+## System Requirements
+
+### JDK 15
+
+### MySQL Database
+
+The program expects a MySQL database at
+```
+  jdbc:mysql://localhost:3306/emerald
+```
+with user/password as  ```developer/developer```
+
+Please edit an ```application.properties``` file to configure.
+
 
 ## How to Build
 
@@ -35,16 +49,6 @@ or
   java -jar build/libs/emerald-0.0.1-SNAPSHOT.jar
 ```
 
-
-## Database Requirement
-
-The program expects a MySQL database at
-```
-  jdbc:mysql://localhost:3306/emerald
-```
-with user/password as  ```developer/developer```
-
-Please edit an ```application.properties``` file to configure.
 
 
 ## WebService REST API
