@@ -1,10 +1,14 @@
-# Backend-Challenge for NextGen_Emerald
+# Coding Sample - RESTful Web Services using Spring Boot
 
-## System Requirements
 
-### JDK 15
 
-### MySQL Database
+### System Requirements
+
+#### JDK 15
+
+Application is implemented in Java 8, but Java 15 features are used in tests.
+
+#### MySQL Database
 
 The program expects a MySQL database at
 ```
@@ -15,17 +19,19 @@ with user/password as  ```developer/developer```
 Please edit an ```application.properties``` file to configure.
 
 
-## How to Build
+
+### How to Build
 
 
-### building Uber jar
+#### building Uber jar
 
 To build jar
 ```
   ./gradlew clean build
 ```
 
-### building Docker image
+
+#### building Docker image
 
 
 To build Docker image
@@ -39,7 +45,7 @@ This build is optimized for Spring Boot application, with high-efficent layered 
 
 
 
-## How to Run
+### How to Run
 
 ```
   ./gradlew bootRun
@@ -51,14 +57,15 @@ or
 
 
 
-## WebService REST API
+### REST Web Service API
 
 For API details please see Swagger UI page, after the service started.
 
 http://localhost:8080/swagger-ui.html
 
 
-## Actuator
+
+### Actuator
 
 Actuator is turned on in development configuration, 
 be sure to turn it off in production by deleting its configuration.
@@ -72,9 +79,10 @@ http://localhost:8080/actuator/env
 http://localhost:8080/actuator/beans
 
 
-## Sample Tests
 
-### Enrollee
+### Sample Tests
+
+#### Enrollee
 
 ```
 curl -v -X POST localhost:8080/enrollees -H 'Content-type:application/json' -d '{"name":"Foo27", "activation":true, "dob":"2000-03-27", "phone":"222-456-7890"}'
@@ -87,7 +95,7 @@ curl -v -X DELETE localhost:8080/enrollees/26
 
 ```
 
-###  Dependent
+####  Dependent
 
 ```
 curl -v -G -X POST localhost:8080/enrollees/29/dependents --data-urlencode 'dob=2007-12-06' --data-urlencode 'name=D29G'
