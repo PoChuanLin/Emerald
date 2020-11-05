@@ -1,4 +1,5 @@
-# Coding Sample - RESTful Web Services using Spring Boot
+
+# RESTful Web Services using Spring Boot
 
 
 
@@ -19,8 +20,8 @@ with user/password as  ```developer/developer```
 Please edit an ```application.properties``` file to configure.
 
 
-
-### How to Build
+---
+### Build - How to
 
 
 #### building Uber jar
@@ -44,8 +45,8 @@ This build is optimized for Spring Boot application, with high-efficent layered 
 (No ```Dockerfile``` is needed, but need ```docker``` installed.)
 
 
-
-### How to Run
+---
+### Running - How to
 
 ```
   ./gradlew bootRun
@@ -56,16 +57,16 @@ or
 ```
 
 
-
-### REST Web Service API
+---
+### API - REST Web Service
 
 For API details please see Swagger UI page, after the service started.
 
 http://localhost:8080/swagger-ui.html
 
 
-
-### Actuator
+---
+### Monitering & Debug - Actuator
 
 Actuator is turned on in development configuration, 
 be sure to turn it off in production by deleting its configuration.
@@ -79,8 +80,8 @@ http://localhost:8080/actuator/env
 http://localhost:8080/actuator/beans
 
 
-
-### Sample Tests
+---
+### Testing Samples
 
 #### Enrollee
 
