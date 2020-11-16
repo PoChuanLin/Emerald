@@ -7,7 +7,7 @@
 
 #### JDK 15
 
-Application is implemented in Java 8, but Java 15 features are used in tests.
+Application is implemented in Java 8, but Java 15 features are used in unit tests.
 
 #### MySQL Database
 
