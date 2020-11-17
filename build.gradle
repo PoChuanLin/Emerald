@@ -5,7 +5,7 @@ plugins {
     id 'java'
 }
 
-group = 'net.nextgen'
+group = 'net.pclin'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '15'
 
@@ -21,7 +21,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'javax.inject:javax.inject:1'
-    implementation 'org.springdoc:springdoc-openapi-ui:1.4.8'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.0'
 
     runtimeOnly 'mysql:mysql-connector-java'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -52,7 +52,7 @@ springBoot {
 
 /*
 bootBuildImage {
-    imageName = "nextgen/emerald"
+    imageName = "pclin/emerald"
 }
 
 bootJar {

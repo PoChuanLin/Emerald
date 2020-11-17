@@ -13,7 +13,7 @@ public class OpenApiConfig {
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Emerald API")
-                        .description("NextGen Emerald challenge application"));
+                        .description("Emerald challenge application"));
         /*
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
